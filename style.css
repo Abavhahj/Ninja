@@ -1,0 +1,116 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+#game-container {
+    position: relative;
+    width: 800px; /* Largura do "palco" do jogo */
+    height: 500px; /* Altura do "palco" do jogo */
+    background-color: #add8e6; /* Cor do céu */
+    border: 2px solid #333;
+    overflow: hidden; /* Garante que nada saia dos limites */
+    /* Para telas menores, podemos ajustar a largura */
+    max-width: 100vw;
+    max-height: 100vh;
+}
+
+#player {
+    position: absolute;
+    width: 30px;
+    height: 40px;
+    background-color: #ff4500; /* Cor do ninja (laranja avermelhado) */
+    bottom: 0; /* Começa no chão */
+    left: 50px;
+    z-index: 10; /* Garante que o player fique acima de outros elementos */
+}
+
+.platform {
+    position: absolute;
+    background-color: #556b2f; /* Cor das plataformas (verde musgo) */
+    width: 150px;
+    height: 20px;
+}
+
+/* Posições das plataformas conforme o desenho */
+#platform1 { bottom: 100px; left: 0px; width: 200px;}
+#platform2 { bottom: 200px; left: 150px; width: 300px;}
+#platform3 { bottom: 200px; left: 450px; width: 100px;}
+#platform4 { bottom: 300px; left: 450px; width: 150px;}
+#platform5 { bottom: 100px; left: 600px; width: 100px;} /* Plataforma direita baixa */
+#platform6 { bottom: 50px; left: 0px; width: 200px;} /* Plataforma esquerda mais baixa */
+#platform7 { bottom: 350px; left: 650px; width: 80px;} /* Plataforma superior direita */
+
+/* Estilos para os botões de celular */
+#mobile-controls {
+    position: absolute;
+    bottom: 10px; /* Distância do fundo */
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* Espaço entre os grupos de botões */
+    padding: 10px;
+    box-sizing: border-box; /* Inclui padding na largura total */
+    z-index: 100; /* Garante que os botões fiquem acima de tudo */
+}
+
+#mobile-controls button {
+    background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+    color: white;
+    border: none;
+    padding: 15px 20px;
+    font-size: 2em;
+    cursor: pointer;
+    border-radius: 8px;
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* Remove highlight ao tocar em iOS */
+    touch-action: manipulation; /* Otimiza para toque */
+}
+
+#mobile-controls button:active {
+    background-color: rgba(0, 0, 0, 0.8); /* Efeito de clique */
+}
+
+/* Posicionamento específico para os botões, se necessário */
+#left-button, #right-button {
+    margin: 0 5px; /* Espaçamento entre os botões de movimento */
+}
+
+/* Agrupar botões de movimento para ficarem mais juntos */
+#mobile-controls > div {
+    display: flex;
+}
+
+/* Ajuste para telas menores */
+@media (max-width: 800px) {
+    #game-container {
+        width: 100vw;
+        height: calc(100vh - 80px); /* Deixa espaço para os controles */
+    }
+    #mobile-controls {
+        position: fixed; /* Fixa os controles na tela, mesmo se o jogo rolar */
+        bottom: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.7);
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        box-sizing: border-box;
+    }
+    #left-button { order: 1; margin-right: auto; } /* Força à esquerda */
+    #right-button { order: 2; }
+    #jump-button { order: 3; margin-left: auto; } /* Força à direita */
+}
+
+@media (max-width: 480px) { /* Para telas de celular muito pequenas */
+    #mobile-controls button {
+        padding: 10px 15px;
+        font-size: 1.5em;
+    }
+}
